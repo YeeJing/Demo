@@ -13,7 +13,7 @@
         margin: 0;
         min-height: 100vh;
         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #130f0c;
+        background: #070605;
       }
 
       .vellum-cover {
@@ -24,9 +24,9 @@
         place-items: center;
         overflow: hidden;
         background:
-          radial-gradient(circle at 50% 30%, rgba(255, 251, 242, 0.28), transparent 34%),
-          linear-gradient(115deg, rgba(18, 14, 11, 0.82), rgba(91, 71, 49, 0.44), rgba(14, 12, 10, 0.86)),
-          url("./public/images/dark-wedding-bg.png") center / cover no-repeat;
+          radial-gradient(circle at 50% 46%, rgba(196, 151, 88, 0.16), transparent 35%),
+          radial-gradient(circle at 50% 100%, rgba(255, 237, 199, 0.08), transparent 34%),
+          #070605;
         color: #fff8ed;
         padding: 24px;
       }
@@ -59,8 +59,8 @@
       .vellum-open-target {
         position: relative;
         display: grid;
-        width: min(430px, calc(100vw - 34px));
-        min-height: min(610px, calc(100vh - 48px));
+        width: min(560px, calc(100vw - 24px));
+        min-height: min(720px, calc(100vh - 28px));
         place-items: center;
         border: 0;
         background: transparent;
@@ -76,7 +76,7 @@
 
       .vellum-glow {
         position: absolute;
-        width: 76%;
+        width: 88%;
         aspect-ratio: 0.78;
         border-radius: 50%;
         background: rgba(255, 239, 202, 0.24);
@@ -87,13 +87,13 @@
       .vellum-envelope,
       .inner-invitation-card {
         position: absolute;
-        width: min(390px, 92vw);
+        width: min(520px, 94vw);
       }
 
       .vellum-envelope {
         top: 50%;
-        height: clamp(250px, 42vw, 310px);
-        transform: translateY(-42%);
+        height: clamp(330px, 56vw, 405px);
+        transform: translateY(-39%);
         transform-style: preserve-3d;
         filter: drop-shadow(0 32px 72px rgba(0, 0, 0, 0.3));
       }
@@ -176,7 +176,7 @@
         top: 50%;
         z-index: 2;
         display: grid;
-        min-height: 310px;
+        min-height: clamp(360px, 62vw, 430px);
         align-content: center;
         justify-items: center;
         gap: 10px;
@@ -196,7 +196,7 @@
       .inner-invitation-card strong {
         max-width: 8.6ch;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(45px, 12vw, 68px);
+        font-size: clamp(54px, 13vw, 82px);
         font-weight: 500;
         line-height: 0.9;
       }
@@ -207,7 +207,7 @@
       .vellum-copy em,
       .tap-hint,
       .transition-ready {
-        font-size: 12px;
+        font-size: 11px;
         font-style: normal;
         font-weight: 900;
         letter-spacing: 0.16em;
@@ -248,19 +248,48 @@
       .tap-hint,
       .transition-ready {
         position: absolute;
-        bottom: clamp(22px, 7vh, 56px);
+        bottom: clamp(20px, 5vh, 42px);
         z-index: 8;
         display: inline-grid;
-        min-height: 38px;
+        min-height: 58px;
+        min-width: 58px;
         place-items: center;
-        border: 1px solid rgba(255, 238, 204, 0.36);
-        border-radius: 999px;
-        background: rgba(255, 250, 239, 0.12);
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
         color: #ffe3b3;
-        padding: 10px 16px;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        padding: 0;
         transition: opacity 420ms ease, transform 420ms ease;
+      }
+
+      .tap-hint::before,
+      .tap-hint::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .tap-hint::before {
+        width: 52px;
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 226, 178, 0.7);
+        box-shadow: 0 0 24px rgba(255, 217, 154, 0.18);
+      }
+
+      .tap-hint::after {
+        width: 13px;
+        aspect-ratio: 1;
+        background: #ffe3b3;
+        box-shadow: 0 0 18px rgba(255, 227, 179, 0.72);
+      }
+
+      .tap-hint span {
+        position: absolute;
+        width: 78px;
+        height: 78px;
+        border: 1px solid rgba(255, 226, 178, 0.22);
+        border-radius: 50%;
+        animation: tapPulse 1800ms ease-out infinite;
       }
 
       .transition-ready {
@@ -274,7 +303,7 @@
       }
 
       .vellum-cover.is-opening .inner-invitation-card {
-        transform: translateY(-68%) scale(1);
+        transform: translateY(-64%) scale(1);
       }
 
       .vellum-cover.is-opening .vellum-copy {
@@ -290,6 +319,18 @@
       .vellum-cover.is-opening .tap-hint {
         opacity: 0;
         transform: translateY(8px);
+      }
+
+      @keyframes tapPulse {
+        0% {
+          opacity: 0.88;
+          transform: scale(0.62);
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(1.18);
+        }
       }
 
       .vellum-cover.is-opening .transition-ready {
@@ -321,7 +362,7 @@
           <strong>Alya &amp; Adam</strong>
           <em>August 22, 2026</em>
         </span>
-        <span class="tap-hint">tap to open</span>
+        <span class="tap-hint" aria-hidden="true"><span></span></span>
         <span class="transition-ready">ready to transition</span>
       </button>
     </section>
