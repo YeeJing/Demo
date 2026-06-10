@@ -59,8 +59,8 @@
       .vellum-open-target {
         position: relative;
         display: grid;
-        width: min(560px, calc(100vw - 24px));
-        min-height: min(720px, calc(100vh - 28px));
+        width: min(460px, calc(100vw - 24px));
+        min-height: min(760px, calc(100vh - 24px));
         place-items: center;
         border: 0;
         background: transparent;
@@ -77,8 +77,8 @@
 
       .vellum-glow {
         position: absolute;
-        width: 88%;
-        aspect-ratio: 0.78;
+        width: 94%;
+        aspect-ratio: 0.64;
         border-radius: 50%;
         background: rgba(255, 239, 202, 0.24);
         filter: blur(54px);
@@ -88,110 +88,152 @@
       .vellum-envelope,
       .inner-invitation-card {
         position: absolute;
-        width: min(520px, 94vw);
+        width: min(420px, 88vw);
       }
 
       .vellum-envelope {
         top: 50%;
-        height: clamp(330px, 56vw, 405px);
-        transform: translateY(-39%);
+        height: min(640px, calc(100vh - 112px));
+        transform: translateY(-50%);
         transform-style: preserve-3d;
-        filter: drop-shadow(0 32px 72px rgba(0, 0, 0, 0.3));
+        filter: drop-shadow(0 34px 80px rgba(0, 0, 0, 0.34));
       }
 
       .vellum-back,
-      .vellum-front,
       .vellum-flap {
         position: absolute;
-        inset: 0;
         border: 1px solid rgba(255, 248, 230, 0.44);
-        backdrop-filter: blur(20px) saturate(1.15);
-        -webkit-backdrop-filter: blur(20px) saturate(1.15);
-      }
-
-      .vellum-back,
-      .vellum-front {
-        background:
-          linear-gradient(135deg, rgba(255, 252, 243, 0.46), rgba(233, 205, 153, 0.24)),
-          repeating-linear-gradient(104deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 13px);
+        backdrop-filter: blur(18px) saturate(1.12);
+        -webkit-backdrop-filter: blur(18px) saturate(1.12);
       }
 
       .vellum-back {
+        inset: 22px 30px 16px;
+        z-index: 1;
         border-radius: 8px;
-        box-shadow:
-          inset 0 1px 34px rgba(255, 255, 255, 0.2),
-          inset 0 -18px 46px rgba(126, 92, 48, 0.08);
-      }
-
-      .vellum-front {
-        top: 32%;
-        z-index: 4;
-        clip-path: polygon(0 0, 50% 48%, 100% 0, 100% 100%, 0 100%);
         background:
-          linear-gradient(180deg, rgba(255, 253, 246, 0.54), rgba(229, 202, 154, 0.3)),
-          repeating-linear-gradient(84deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 15px);
+          linear-gradient(180deg, rgba(255, 253, 245, 0.95), rgba(239, 232, 213, 0.9)),
+          repeating-linear-gradient(90deg, rgba(126, 106, 69, 0.045) 0 1px, transparent 1px 12px);
+        box-shadow:
+          inset 0 0 42px rgba(168, 140, 91, 0.08),
+          0 28px 70px rgba(0, 0, 0, 0.26);
       }
 
       .vellum-flap {
-        z-index: 3;
-        background: linear-gradient(145deg, rgba(255, 252, 243, 0.5), rgba(229, 202, 154, 0.22));
+        top: 7px;
+        bottom: 7px;
+        z-index: 4;
+        width: 54%;
+        overflow: hidden;
+        background:
+          linear-gradient(145deg, rgba(236, 239, 201, 0.62), rgba(218, 225, 178, 0.36)),
+          repeating-linear-gradient(100deg, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 13px);
+        box-shadow:
+          inset 0 0 34px rgba(255, 255, 255, 0.12),
+          inset 0 -20px 52px rgba(116, 122, 76, 0.08);
+        transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 720ms ease;
       }
 
       .vellum-flap-top {
-        z-index: 5;
-        clip-path: polygon(0 0, 100% 0, 50% 62%);
-        transform-origin: top center;
-        transition: transform 980ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 980ms ease;
+        display: none;
       }
 
       .vellum-flap-left {
-        clip-path: polygon(0 0, 50% 52%, 0 100%);
+        left: 0;
+        border-radius: 8px 28px 28px 8px;
+        clip-path: polygon(0 0, 100% 0, 92% 16%, 100% 30%, 90% 45%, 100% 61%, 92% 78%, 100% 100%, 0 100%);
+        transform-origin: left center;
       }
 
       .vellum-flap-right {
-        clip-path: polygon(100% 0, 50% 52%, 100% 100%);
+        right: 0;
+        border-radius: 28px 8px 8px 28px;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 8% 78%, 0 62%, 10% 45%, 0 30%, 8% 16%);
+        transform-origin: right center;
+      }
+
+      .floral-foil {
+        position: absolute;
+        z-index: 5;
+        top: 8%;
+        width: 52%;
+        height: 84%;
+        fill: none;
+        stroke: rgba(112, 126, 74, 0.72);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.35;
+        filter:
+          drop-shadow(0 0 1px rgba(255, 249, 196, 0.38))
+          drop-shadow(0 1px 0 rgba(255, 255, 255, 0.25));
+        opacity: 0.92;
+        pointer-events: none;
+        transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 720ms ease;
+      }
+
+      .floral-foil-left {
+        left: 1%;
+        transform-origin: left center;
+      }
+
+      .floral-foil-right {
+        right: 1%;
+        transform: scaleX(-1);
+        transform-origin: right center;
       }
 
       .vellum-seal {
         position: absolute;
         z-index: 6;
         left: 50%;
-        top: 53%;
+        top: 56%;
         display: grid;
-        width: 54px;
+        width: 70px;
         aspect-ratio: 1;
         place-items: center;
-        border: 1px solid rgba(255, 230, 181, 0.62);
+        border: 1px solid rgba(255, 231, 168, 0.76);
         border-radius: 50%;
-        background: rgba(111, 77, 39, 0.22);
-        color: #ffe6b5;
+        background:
+          radial-gradient(circle at 34% 28%, rgba(255, 244, 200, 0.5), transparent 23%),
+          linear-gradient(145deg, rgba(164, 129, 56, 0.86), rgba(87, 70, 31, 0.9));
+        color: #fff0b8;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: 22px;
+        font-size: 25px;
         transform: translate(-50%, -50%);
-        transition: transform 520ms ease, opacity 520ms ease;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        transition: transform 620ms ease, opacity 520ms ease;
+        box-shadow:
+          inset 0 2px 6px rgba(255, 255, 255, 0.22),
+          inset 0 -4px 10px rgba(44, 31, 10, 0.32),
+          0 14px 28px rgba(0, 0, 0, 0.25);
+      }
+
+      .vellum-seal::before {
+        content: "";
+        position: absolute;
+        inset: 9px;
+        border: 1px solid rgba(255, 238, 188, 0.58);
+        border-radius: 50%;
       }
 
       .inner-invitation-card {
         top: 50%;
         z-index: 2;
         display: grid;
-        min-height: clamp(360px, 62vw, 430px);
+        min-height: min(560px, calc(100vh - 184px));
         align-content: center;
         justify-items: center;
         gap: 10px;
-        border: 1px solid rgba(255, 246, 224, 0.72);
+        border: 1px solid rgba(160, 137, 92, 0.28);
         border-radius: 8px;
         background:
-          linear-gradient(160deg, rgba(255, 253, 247, 0.84), rgba(238, 217, 176, 0.72)),
+          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(242, 235, 218, 0.96)),
           repeating-linear-gradient(90deg, rgba(121, 89, 48, 0.055) 0 1px, transparent 1px 11px);
         box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
         color: #2f2418;
         opacity: 0;
-        padding: 30px;
+        padding: 40px 32px;
         text-align: center;
-        transform: translateY(-30%) scale(0.94);
+        transform: translateY(-44%) scale(0.94);
         transition:
           opacity 520ms ease 260ms,
           transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1) 260ms;
@@ -200,7 +242,7 @@
       .inner-invitation-card strong {
         max-width: 8.6ch;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(54px, 13vw, 82px);
+        font-size: clamp(48px, 11vw, 76px);
         font-weight: 500;
         line-height: 0.9;
       }
@@ -226,14 +268,16 @@
       .vellum-copy {
         position: absolute;
         z-index: 7;
-        top: calc(50% - 28px);
+        top: calc(50% - 205px);
         display: grid;
         justify-items: center;
         gap: 12px;
         width: min(330px, 76vw);
-        color: rgba(255, 249, 235, 0.94);
+        color: rgba(255, 241, 184, 0.96);
         text-align: center;
-        text-shadow: 0 2px 18px rgba(57, 38, 19, 0.38);
+        text-shadow:
+          0 1px 0 rgba(78, 62, 29, 0.54),
+          0 0 18px rgba(255, 219, 134, 0.18);
         transition: opacity 420ms ease, transform 420ms ease;
       }
 
@@ -244,9 +288,13 @@
       .vellum-copy strong {
         max-width: 8.4ch;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(46px, 12vw, 68px);
+        font-size: clamp(46px, 11vw, 72px);
         font-weight: 500;
         line-height: 0.9;
+        background: linear-gradient(110deg, #fff2b9, #a88032 34%, #fff6c8 52%, #8b6a27 72%, #fff0ae);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
       }
 
       .vellum-copy em {
@@ -256,7 +304,7 @@
       .tap-hint,
       .transition-ready {
         position: absolute;
-        bottom: clamp(20px, 5vh, 42px);
+        bottom: clamp(16px, 3vh, 28px);
         z-index: 8;
         display: inline-grid;
         min-height: 58px;
@@ -306,13 +354,32 @@
       }
 
       .vellum-cover.is-opening .vellum-flap-top {
-        opacity: 0.86;
-        transform: rotateX(152deg) translateY(-2px);
+        opacity: 0;
+      }
+
+      .vellum-cover.is-opening .vellum-flap-left {
+        opacity: 0.9;
+        transform: rotateY(-108deg) translateX(-8px);
+      }
+
+      .vellum-cover.is-opening .vellum-flap-right {
+        opacity: 0.9;
+        transform: rotateY(108deg) translateX(8px);
+      }
+
+      .vellum-cover.is-opening .floral-foil-left {
+        opacity: 0.72;
+        transform: rotateY(-108deg) translateX(-8px);
+      }
+
+      .vellum-cover.is-opening .floral-foil-right {
+        opacity: 0.72;
+        transform: scaleX(-1) rotateY(-108deg) translateX(-8px);
       }
 
       .vellum-cover.is-opening .inner-invitation-card {
         opacity: 1;
-        transform: translateY(-64%) scale(1);
+        transform: translateY(-50%) scale(1);
       }
 
       .vellum-cover.is-opening .vellum-copy {
@@ -360,11 +427,35 @@
         </span>
         <span class="vellum-envelope" aria-hidden="true">
           <span class="vellum-back"></span>
-          <span class="vellum-flap vellum-flap-top"></span>
           <span class="vellum-flap vellum-flap-left"></span>
           <span class="vellum-flap vellum-flap-right"></span>
-          <span class="vellum-front"></span>
-          <span class="vellum-seal">V</span>
+          <svg class="floral-foil floral-foil-left" viewBox="0 0 220 520">
+            <path d="M36 438 C64 374 47 321 87 257 C119 206 116 151 91 85" />
+            <path d="M61 394 C31 383 19 354 33 333 C51 304 94 318 95 353 C96 380 81 394 61 394Z" />
+            <path d="M54 350 C82 336 96 349 91 373 M36 338 C57 357 57 379 48 392" />
+            <path d="M111 278 C80 260 77 219 106 204 C139 186 170 223 151 254 C141 272 128 282 111 278Z" />
+            <path d="M105 211 C125 233 126 254 112 276 M145 214 C128 231 113 248 106 272" />
+            <path d="M96 142 C63 125 62 85 88 68 C119 49 153 82 139 116 C131 137 116 146 96 142Z" />
+            <path d="M88 72 C105 96 109 117 98 139 M134 78 C118 97 104 117 96 140" />
+            <path d="M113 329 C145 305 180 319 184 350 C188 382 149 404 124 379 C105 361 103 345 113 329Z" />
+            <path d="M120 331 C142 349 144 365 128 380 M179 345 C156 349 139 360 121 376" />
+            <path d="M87 257 C56 238 43 210 49 183 M92 247 C124 238 151 211 159 177" />
+            <path d="M88 259 C58 273 42 300 39 326 M93 254 C129 264 160 282 177 314" />
+          </svg>
+          <svg class="floral-foil floral-foil-right" viewBox="0 0 220 520">
+            <path d="M36 438 C64 374 47 321 87 257 C119 206 116 151 91 85" />
+            <path d="M61 394 C31 383 19 354 33 333 C51 304 94 318 95 353 C96 380 81 394 61 394Z" />
+            <path d="M54 350 C82 336 96 349 91 373 M36 338 C57 357 57 379 48 392" />
+            <path d="M111 278 C80 260 77 219 106 204 C139 186 170 223 151 254 C141 272 128 282 111 278Z" />
+            <path d="M105 211 C125 233 126 254 112 276 M145 214 C128 231 113 248 106 272" />
+            <path d="M96 142 C63 125 62 85 88 68 C119 49 153 82 139 116 C131 137 116 146 96 142Z" />
+            <path d="M88 72 C105 96 109 117 98 139 M134 78 C118 97 104 117 96 140" />
+            <path d="M113 329 C145 305 180 319 184 350 C188 382 149 404 124 379 C105 361 103 345 113 329Z" />
+            <path d="M120 331 C142 349 144 365 128 380 M179 345 C156 349 139 360 121 376" />
+            <path d="M87 257 C56 238 43 210 49 183 M92 247 C124 238 151 211 159 177" />
+            <path d="M88 259 C58 273 42 300 39 326 M93 254 C129 264 160 282 177 314" />
+          </svg>
+          <span class="vellum-seal">A+A</span>
         </span>
         <span class="vellum-copy">
           <span>You are invited</span>
