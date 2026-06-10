@@ -67,6 +67,7 @@
         color: inherit;
         cursor: pointer;
         perspective: 1300px;
+        user-select: none;
       }
 
       .vellum-open-target:focus-visible {
@@ -233,6 +234,10 @@
         transition: opacity 420ms ease, transform 420ms ease;
       }
 
+      .tap-hint {
+        pointer-events: auto;
+      }
+
       .vellum-copy strong {
         max-width: 8.4ch;
         font-family: Georgia, "Times New Roman", serif;
@@ -342,7 +347,7 @@
   </head>
   <body>
     <section class="vellum-cover" aria-label="Open wedding invitation">
-      <button class="vellum-open-target" type="button">
+      <div class="vellum-open-target" role="button" tabindex="0" aria-label="Open invitation">
         <span class="vellum-glow" aria-hidden="true"></span>
         <span class="inner-invitation-card">
           <span class="inner-kicker">You are invited</span>
@@ -364,15 +369,23 @@
         </span>
         <span class="tap-hint" aria-hidden="true"><span></span></span>
         <span class="transition-ready">ready to transition</span>
-      </button>
+      </div>
     </section>
     <script>
       const cover = document.querySelector(".vellum-cover");
-      const button = document.querySelector(".vellum-open-target");
+      const target = document.querySelector(".vellum-open-target");
 
-      button.addEventListener("click", () => {
+      function openCover() {
+        if (cover.classList.contains("is-opening")) return;
         cover.classList.add("is-opening");
-        button.disabled = true;
+      }
+
+      target.addEventListener("click", openCover);
+      target.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openCover();
+        }
       });
     </script>
   </body>
