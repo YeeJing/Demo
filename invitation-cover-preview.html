@@ -24,9 +24,9 @@
         place-items: center;
         overflow: hidden;
         background:
-          radial-gradient(circle at 50% 46%, rgba(196, 151, 88, 0.16), transparent 35%),
-          radial-gradient(circle at 50% 100%, rgba(255, 237, 199, 0.08), transparent 34%),
-          #070605;
+          radial-gradient(circle at 50% 42%, rgba(170, 161, 112, 0.18), transparent 36%),
+          radial-gradient(circle at 50% 100%, rgba(242, 231, 205, 0.08), transparent 34%),
+          #080806;
         color: #fff8ed;
         padding: 24px;
       }
@@ -41,16 +41,15 @@
 
       .vellum-cover::before {
         background:
-          repeating-linear-gradient(96deg, rgba(255, 250, 239, 0.055) 0 1px, transparent 1px 12px),
-          repeating-linear-gradient(0deg, rgba(255, 250, 239, 0.035) 0 1px, transparent 1px 9px);
-        opacity: 0.7;
-        mix-blend-mode: screen;
+          repeating-linear-gradient(96deg, rgba(255, 250, 235, 0.032) 0 1px, transparent 1px 12px),
+          repeating-linear-gradient(0deg, rgba(255, 250, 235, 0.024) 0 1px, transparent 1px 9px);
+        opacity: 0.55;
       }
 
       .vellum-cover::after {
         background-image:
-          radial-gradient(circle, rgba(255, 255, 255, 0.16) 0 0.7px, transparent 0.9px),
-          radial-gradient(circle, rgba(60, 42, 28, 0.2) 0 0.6px, transparent 0.9px);
+          radial-gradient(circle, rgba(255, 255, 255, 0.1) 0 0.7px, transparent 0.9px),
+          radial-gradient(circle, rgba(67, 60, 38, 0.16) 0 0.6px, transparent 0.9px);
         background-position: 0 0, 12px 17px;
         background-size: 26px 26px, 31px 31px;
         opacity: 0.18;
@@ -80,8 +79,8 @@
         width: 94%;
         aspect-ratio: 0.64;
         border-radius: 50%;
-        background: rgba(255, 239, 202, 0.24);
-        filter: blur(54px);
+        background: rgba(232, 224, 184, 0.16);
+        filter: blur(58px);
         transform: translateY(18px);
       }
 
@@ -102,9 +101,7 @@
       .vellum-back,
       .vellum-flap {
         position: absolute;
-        border: 1px solid rgba(255, 248, 230, 0.44);
-        backdrop-filter: blur(18px) saturate(1.12);
-        -webkit-backdrop-filter: blur(18px) saturate(1.12);
+        border: 1px solid rgba(72, 78, 47, 0.18);
       }
 
       .vellum-back {
@@ -112,10 +109,13 @@
         z-index: 1;
         border-radius: 8px;
         background:
-          linear-gradient(180deg, rgba(255, 253, 245, 0.95), rgba(239, 232, 213, 0.9)),
-          repeating-linear-gradient(90deg, rgba(126, 106, 69, 0.045) 0 1px, transparent 1px 12px);
+          radial-gradient(circle at 28% 18%, rgba(255, 255, 248, 0.88), transparent 28%),
+          radial-gradient(circle at 78% 70%, rgba(214, 221, 184, 0.45), transparent 32%),
+          linear-gradient(180deg, #f7f3e8, #ece6d4),
+          repeating-linear-gradient(88deg, rgba(102, 89, 62, 0.035) 0 1px, transparent 1px 9px);
         box-shadow:
-          inset 0 0 42px rgba(168, 140, 91, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.72),
+          inset 0 -24px 54px rgba(137, 122, 77, 0.13),
           0 28px 70px rgba(0, 0, 0, 0.26);
       }
 
@@ -126,11 +126,14 @@
         width: 54%;
         overflow: hidden;
         background:
-          linear-gradient(145deg, rgba(236, 239, 201, 0.62), rgba(218, 225, 178, 0.36)),
-          repeating-linear-gradient(100deg, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 13px);
+          radial-gradient(circle at 32% 18%, rgba(244, 250, 211, 0.52), transparent 26%),
+          radial-gradient(circle at 70% 72%, rgba(151, 166, 102, 0.22), transparent 34%),
+          linear-gradient(145deg, #dce5b1, #bfc997),
+          repeating-linear-gradient(96deg, rgba(71, 82, 45, 0.035) 0 1px, transparent 1px 10px);
         box-shadow:
-          inset 0 0 34px rgba(255, 255, 255, 0.12),
-          inset 0 -20px 52px rgba(116, 122, 76, 0.08);
+          inset 1px 1px 0 rgba(255, 255, 255, 0.55),
+          inset -1px -1px 0 rgba(72, 83, 49, 0.18),
+          inset 0 -20px 52px rgba(94, 108, 61, 0.12);
         transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 720ms ease;
       }
 
@@ -159,14 +162,14 @@
         width: 52%;
         height: 84%;
         fill: none;
-        stroke: rgba(112, 126, 74, 0.72);
+        stroke: rgba(83, 100, 58, 0.42);
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 1.35;
         filter:
-          drop-shadow(0 0 1px rgba(255, 249, 196, 0.38))
-          drop-shadow(0 1px 0 rgba(255, 255, 255, 0.25));
-        opacity: 0.92;
+          drop-shadow(0 -1px 0 rgba(255, 255, 232, 0.55))
+          drop-shadow(0 1px 0 rgba(55, 67, 39, 0.32));
+        opacity: 0.78;
         pointer-events: none;
         transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 720ms ease;
       }
@@ -191,27 +194,30 @@
         width: 70px;
         aspect-ratio: 1;
         place-items: center;
-        border: 1px solid rgba(255, 231, 168, 0.76);
+        border: 1px solid rgba(95, 101, 61, 0.2);
         border-radius: 50%;
         background:
-          radial-gradient(circle at 34% 28%, rgba(255, 244, 200, 0.5), transparent 23%),
-          linear-gradient(145deg, rgba(164, 129, 56, 0.86), rgba(87, 70, 31, 0.9));
-        color: #fff0b8;
+          radial-gradient(circle at 34% 26%, rgba(255, 255, 235, 0.62), transparent 23%),
+          linear-gradient(145deg, #d7e0ab, #aab77c);
+        color: rgba(75, 86, 48, 0.8);
         font-family: Georgia, "Times New Roman", serif;
         font-size: 25px;
         transform: translate(-50%, -50%);
         transition: transform 620ms ease, opacity 520ms ease;
         box-shadow:
-          inset 0 2px 6px rgba(255, 255, 255, 0.22),
-          inset 0 -4px 10px rgba(44, 31, 10, 0.32),
+          inset 2px 2px 4px rgba(255, 255, 236, 0.66),
+          inset -3px -4px 8px rgba(65, 75, 42, 0.22),
           0 14px 28px rgba(0, 0, 0, 0.25);
+        text-shadow:
+          0 -1px 0 rgba(255, 255, 231, 0.58),
+          0 1px 0 rgba(71, 81, 45, 0.26);
       }
 
       .vellum-seal::before {
         content: "";
         position: absolute;
         inset: 9px;
-        border: 1px solid rgba(255, 238, 188, 0.58);
+        border: 1px solid rgba(82, 93, 52, 0.2);
         border-radius: 50%;
       }
 
@@ -226,10 +232,12 @@
         border: 1px solid rgba(160, 137, 92, 0.28);
         border-radius: 8px;
         background:
-          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(242, 235, 218, 0.96)),
-          repeating-linear-gradient(90deg, rgba(121, 89, 48, 0.055) 0 1px, transparent 1px 11px);
+          radial-gradient(circle at 22% 18%, rgba(255, 255, 251, 0.95), transparent 24%),
+          radial-gradient(circle at 70% 68%, rgba(222, 229, 194, 0.38), transparent 32%),
+          linear-gradient(180deg, #fbf8ef, #efe7d4),
+          repeating-linear-gradient(90deg, rgba(121, 89, 48, 0.035) 0 1px, transparent 1px 11px);
         box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
-        color: #2f2418;
+        color: #2f2a20;
         opacity: 0;
         padding: 40px 32px;
         text-align: center;
@@ -273,11 +281,11 @@
         justify-items: center;
         gap: 12px;
         width: min(330px, 76vw);
-        color: rgba(255, 241, 184, 0.96);
+        color: rgba(82, 94, 54, 0.72);
         text-align: center;
         text-shadow:
-          0 1px 0 rgba(78, 62, 29, 0.54),
-          0 0 18px rgba(255, 219, 134, 0.18);
+          0 -1px 0 rgba(255, 255, 232, 0.56),
+          0 1px 0 rgba(61, 73, 42, 0.2);
         transition: opacity 420ms ease, transform 420ms ease;
       }
 
@@ -291,10 +299,10 @@
         font-size: clamp(46px, 11vw, 72px);
         font-weight: 500;
         line-height: 0.9;
-        background: linear-gradient(110deg, #fff2b9, #a88032 34%, #fff6c8 52%, #8b6a27 72%, #fff0ae);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        color: rgba(73, 84, 48, 0.78);
+        text-shadow:
+          0 -1px 0 rgba(255, 255, 231, 0.66),
+          0 2px 1px rgba(65, 77, 44, 0.16);
       }
 
       .vellum-copy em {
