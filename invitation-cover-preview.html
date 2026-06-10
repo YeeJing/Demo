@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Frosted Vellum Invitation Cover</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #130f0c;
+      }
+
+      .vellum-cover {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 30%, rgba(255, 251, 242, 0.28), transparent 34%),
+          linear-gradient(115deg, rgba(18, 14, 11, 0.82), rgba(91, 71, 49, 0.44), rgba(14, 12, 10, 0.86)),
+          url("./public/images/dark-wedding-bg.png") center / cover no-repeat;
+        color: #fff8ed;
+        padding: 24px;
+      }
+
+      .vellum-cover::before,
+      .vellum-cover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .vellum-cover::before {
+        background:
+          repeating-linear-gradient(96deg, rgba(255, 250, 239, 0.055) 0 1px, transparent 1px 12px),
+          repeating-linear-gradient(0deg, rgba(255, 250, 239, 0.035) 0 1px, transparent 1px 9px);
+        opacity: 0.7;
+        mix-blend-mode: screen;
+      }
+
+      .vellum-cover::after {
+        background-image:
+          radial-gradient(circle, rgba(255, 255, 255, 0.16) 0 0.7px, transparent 0.9px),
+          radial-gradient(circle, rgba(60, 42, 28, 0.2) 0 0.6px, transparent 0.9px);
+        background-position: 0 0, 12px 17px;
+        background-size: 26px 26px, 31px 31px;
+        opacity: 0.18;
+      }
+
+      .vellum-open-target {
+        position: relative;
+        display: grid;
+        width: min(430px, calc(100vw - 34px));
+        min-height: min(610px, calc(100vh - 48px));
+        place-items: center;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        perspective: 1300px;
+      }
+
+      .vellum-open-target:focus-visible {
+        outline: 2px solid rgba(255, 244, 219, 0.9);
+        outline-offset: 8px;
+      }
+
+      .vellum-glow {
+        position: absolute;
+        width: 76%;
+        aspect-ratio: 0.78;
+        border-radius: 50%;
+        background: rgba(255, 239, 202, 0.24);
+        filter: blur(54px);
+        transform: translateY(18px);
+      }
+
+      .vellum-envelope,
+      .inner-invitation-card {
+        position: absolute;
+        width: min(390px, 92vw);
+      }
+
+      .vellum-envelope {
+        top: 50%;
+        height: clamp(250px, 42vw, 310px);
+        transform: translateY(-42%);
+        transform-style: preserve-3d;
+        filter: drop-shadow(0 32px 72px rgba(0, 0, 0, 0.3));
+      }
+
+      .vellum-back,
+      .vellum-front,
+      .vellum-flap {
+        position: absolute;
+        inset: 0;
+        border: 1px solid rgba(255, 248, 230, 0.44);
+        backdrop-filter: blur(20px) saturate(1.15);
+        -webkit-backdrop-filter: blur(20px) saturate(1.15);
+      }
+
+      .vellum-back,
+      .vellum-front {
+        background:
+          linear-gradient(135deg, rgba(255, 252, 243, 0.46), rgba(233, 205, 153, 0.24)),
+          repeating-linear-gradient(104deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 13px);
+      }
+
+      .vellum-back {
+        border-radius: 8px;
+        box-shadow:
+          inset 0 1px 34px rgba(255, 255, 255, 0.2),
+          inset 0 -18px 46px rgba(126, 92, 48, 0.08);
+      }
+
+      .vellum-front {
+        top: 32%;
+        z-index: 4;
+        clip-path: polygon(0 0, 50% 48%, 100% 0, 100% 100%, 0 100%);
+        background:
+          linear-gradient(180deg, rgba(255, 253, 246, 0.54), rgba(229, 202, 154, 0.3)),
+          repeating-linear-gradient(84deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 15px);
+      }
+
+      .vellum-flap {
+        z-index: 3;
+        background: linear-gradient(145deg, rgba(255, 252, 243, 0.5), rgba(229, 202, 154, 0.22));
+      }
+
+      .vellum-flap-top {
+        z-index: 5;
+        clip-path: polygon(0 0, 100% 0, 50% 62%);
+        transform-origin: top center;
+        transition: transform 980ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 980ms ease;
+      }
+
+      .vellum-flap-left {
+        clip-path: polygon(0 0, 50% 52%, 0 100%);
+      }
+
+      .vellum-flap-right {
+        clip-path: polygon(100% 0, 50% 52%, 100% 100%);
+      }
+
+      .vellum-seal {
+        position: absolute;
+        z-index: 6;
+        left: 50%;
+        top: 53%;
+        display: grid;
+        width: 54px;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid rgba(255, 230, 181, 0.62);
+        border-radius: 50%;
+        background: rgba(111, 77, 39, 0.22);
+        color: #ffe6b5;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 22px;
+        transform: translate(-50%, -50%);
+        transition: transform 520ms ease, opacity 520ms ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .inner-invitation-card {
+        top: 50%;
+        z-index: 2;
+        display: grid;
+        min-height: 310px;
+        align-content: center;
+        justify-items: center;
+        gap: 10px;
+        border: 1px solid rgba(255, 246, 224, 0.72);
+        border-radius: 8px;
+        background:
+          linear-gradient(160deg, rgba(255, 253, 247, 0.84), rgba(238, 217, 176, 0.72)),
+          repeating-linear-gradient(90deg, rgba(121, 89, 48, 0.055) 0 1px, transparent 1px 11px);
+        box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+        color: #2f2418;
+        padding: 30px;
+        text-align: center;
+        transform: translateY(-30%) scale(0.94);
+        transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1) 260ms;
+      }
+
+      .inner-invitation-card strong {
+        max-width: 8.6ch;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(45px, 12vw, 68px);
+        font-weight: 500;
+        line-height: 0.9;
+      }
+
+      .inner-kicker,
+      .inner-invitation-card span:last-child,
+      .vellum-copy span,
+      .vellum-copy em,
+      .tap-hint,
+      .transition-ready {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .inner-kicker,
+      .inner-invitation-card span:last-child {
+        color: #a87635;
+      }
+
+      .vellum-copy {
+        position: absolute;
+        z-index: 7;
+        top: calc(50% - 28px);
+        display: grid;
+        justify-items: center;
+        gap: 12px;
+        width: min(330px, 76vw);
+        color: rgba(255, 249, 235, 0.94);
+        text-align: center;
+        text-shadow: 0 2px 18px rgba(57, 38, 19, 0.38);
+        transition: opacity 420ms ease, transform 420ms ease;
+      }
+
+      .vellum-copy strong {
+        max-width: 8.4ch;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(46px, 12vw, 68px);
+        font-weight: 500;
+        line-height: 0.9;
+      }
+
+      .vellum-copy em {
+        color: #f0d5a5;
+      }
+
+      .tap-hint,
+      .transition-ready {
+        position: absolute;
+        bottom: clamp(22px, 7vh, 56px);
+        z-index: 8;
+        display: inline-grid;
+        min-height: 38px;
+        place-items: center;
+        border: 1px solid rgba(255, 238, 204, 0.36);
+        border-radius: 999px;
+        background: rgba(255, 250, 239, 0.12);
+        color: #ffe3b3;
+        padding: 10px 16px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: opacity 420ms ease, transform 420ms ease;
+      }
+
+      .transition-ready {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .vellum-cover.is-opening .vellum-flap-top {
+        opacity: 0.86;
+        transform: rotateX(152deg) translateY(-2px);
+      }
+
+      .vellum-cover.is-opening .inner-invitation-card {
+        transform: translateY(-68%) scale(1);
+      }
+
+      .vellum-cover.is-opening .vellum-copy {
+        opacity: 0;
+        transform: translateY(-18px);
+      }
+
+      .vellum-cover.is-opening .vellum-seal {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.62);
+      }
+
+      .vellum-cover.is-opening .tap-hint {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      .vellum-cover.is-opening .transition-ready {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 1200ms;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="vellum-cover" aria-label="Open wedding invitation">
+      <button class="vellum-open-target" type="button">
+        <span class="vellum-glow" aria-hidden="true"></span>
+        <span class="inner-invitation-card">
+          <span class="inner-kicker">You are invited</span>
+          <strong>Alya &amp; Adam</strong>
+          <span>August 22, 2026</span>
+        </span>
+        <span class="vellum-envelope" aria-hidden="true">
+          <span class="vellum-back"></span>
+          <span class="vellum-flap vellum-flap-top"></span>
+          <span class="vellum-flap vellum-flap-left"></span>
+          <span class="vellum-flap vellum-flap-right"></span>
+          <span class="vellum-front"></span>
+          <span class="vellum-seal">V</span>
+        </span>
+        <span class="vellum-copy">
+          <span>You are invited</span>
+          <strong>Alya &amp; Adam</strong>
+          <em>August 22, 2026</em>
+        </span>
+        <span class="tap-hint">tap to open</span>
+        <span class="transition-ready">ready to transition</span>
+      </button>
+    </section>
+    <script>
+      const cover = document.querySelector(".vellum-cover");
+      const button = document.querySelector(".vellum-open-target");
+
+      button.addEventListener("click", () => {
+        cover.classList.add("is-opening");
+        button.disabled = true;
+      });
+    </script>
+  </body>
+</html>
