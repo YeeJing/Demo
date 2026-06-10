@@ -188,10 +188,13 @@
           repeating-linear-gradient(90deg, rgba(121, 89, 48, 0.055) 0 1px, transparent 1px 11px);
         box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
         color: #2f2418;
+        opacity: 0;
         padding: 30px;
         text-align: center;
         transform: translateY(-30%) scale(0.94);
-        transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1) 260ms;
+        transition:
+          opacity 520ms ease 260ms,
+          transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1) 260ms;
       }
 
       .inner-invitation-card strong {
@@ -308,6 +311,7 @@
       }
 
       .vellum-cover.is-opening .inner-invitation-card {
+        opacity: 1;
         transform: translateY(-64%) scale(1);
       }
 
