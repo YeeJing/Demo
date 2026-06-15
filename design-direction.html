@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aureveil Studio Design Direction</title>
+    <style>
+      :root {
+        --ink: #25241f;
+        --muted: #6e6a5d;
+        --paper: #f4efe3;
+        --sage: #aeb982;
+        --line: rgba(59, 57, 47, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(174, 185, 130, 0.24), transparent 34%),
+          linear-gradient(180deg, #fbf8ef, var(--paper));
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(860px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 56px 0 72px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .back-link {
+        display: inline-flex;
+        margin-bottom: 42px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: #737d50;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        font-size: clamp(48px, 9vw, 86px);
+        line-height: 0.92;
+      }
+
+      h2 {
+        margin-top: 44px;
+        font-size: clamp(30px, 5vw, 46px);
+        line-height: 1;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      ul,
+      pre {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.82), transparent 34%),
+          rgba(255, 255, 255, 0.48);
+        box-shadow: 0 18px 58px rgba(77, 72, 55, 0.08);
+      }
+
+      ul {
+        display: grid;
+        gap: 10px;
+        padding: 22px 24px 22px 42px;
+      }
+
+      li {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      pre {
+        overflow-x: auto;
+        padding: 18px;
+        color: #4c5134;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .swatches {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .swatch {
+        width: 92px;
+        height: 58px;
+        border: 1px solid rgba(37, 36, 31, 0.14);
+        border-radius: 8px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back-link" href="invitation-cover-preview.html?v=20260611-3">Back to cover</a>
+      <p class="eyebrow">Aureveil Studio</p>
+      <h1>Design direction for the invitation cover.</h1>
+      <p>
+        The cover should feel like a physical editorial wedding stationery piece: solid paper,
+        watercolor texture, embossed floral details, quiet typography, and a soft gatefold opening.
+      </p>
+
+      <h2>Visual Language</h2>
+      <ul>
+        <li>Solid paper objects rather than glass or transparent vellum.</li>
+        <li>Sage, ivory, powder blue, charcoal, and warm black.</li>
+        <li>Embossed or debossed floral artwork with soft natural shadows.</li>
+        <li>Laser-cut or die-cut floral panel edges.</li>
+        <li>Minimal serif typography with generous negative space.</li>
+        <li>Handwritten script as a small accent only.</li>
+      </ul>
+
+      <div class="swatches" aria-label="Color palette">
+        <span class="swatch" style="background:#f4efe3"></span>
+        <span class="swatch" style="background:#dce5b1"></span>
+        <span class="swatch" style="background:#bfc997"></span>
+        <span class="swatch" style="background:#cbd8df"></span>
+        <span class="swatch" style="background:#080806"></span>
+      </div>
+
+      <h2>Asset Exports</h2>
+      <pre>Artboard: 840 x 1280 px
+
+envelope-back.png      840 x 1280 px
+envelope-left.png      460 x 1280 px
+envelope-right.png     460 x 1280 px
+seal.png               220 x 220 px
+invitation-card.png    760 x 1120 px</pre>
+
+      <h2>Animation</h2>
+      <ul>
+        <li>Left and right panels rotate open from their outer edges.</li>
+        <li>The monogram seal fades and scales away first.</li>
+        <li>The inner invitation rises after the panels begin opening.</li>
+        <li>Motion should feel tactile, slow, and soft.</li>
+      </ul>
+    </main>
+  </body>
+</html>

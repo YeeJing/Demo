@@ -361,6 +361,19 @@
         transform: translateY(18px);
       }
 
+      .direction-link {
+        position: fixed;
+        right: 18px;
+        bottom: 16px;
+        z-index: 30;
+        color: rgba(244, 239, 227, 0.52);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
       .vellum-cover.is-opening .vellum-flap-top {
         opacity: 0;
       }
@@ -474,6 +487,7 @@
         <span class="transition-ready">ready to transition</span>
       </div>
     </section>
+    <a class="direction-link" href="design-direction.html">Direction</a>
     <script>
       const cover = document.querySelector(".vellum-cover");
       const target = document.querySelector(".vellum-open-target");
