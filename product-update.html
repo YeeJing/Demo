@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aureveil Studios Product Update</title>
+    <style>
+      :root {
+        --ink: #24221e;
+        --muted: #706a5e;
+        --paper: #f5efe5;
+        --sage: #aeb982;
+        --line: rgba(52, 48, 41, 0.14);
+        --gold: #a9833d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 16% 0%, rgba(174, 185, 130, 0.2), transparent 32%),
+          radial-gradient(circle at 84% 10%, rgba(169, 131, 61, 0.12), transparent 28%),
+          linear-gradient(180deg, #fbf8f0, var(--paper));
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(1040px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 54px 0 76px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .top-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 46px;
+      }
+
+      .top-nav a,
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.42);
+        color: var(--muted);
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: #77814f;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 850px;
+        font-size: clamp(50px, 9vw, 92px);
+        line-height: 0.92;
+      }
+
+      h2 {
+        margin-top: 56px;
+        font-size: clamp(34px, 5vw, 58px);
+        line-height: 1;
+      }
+
+      h3 {
+        font-size: 28px;
+      }
+
+      p,
+      li,
+      td,
+      th {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin: 22px 0 0;
+        font-size: 19px;
+      }
+
+      .quote {
+        margin: 28px 0 0;
+        border-left: 3px solid var(--gold);
+        padding-left: 18px;
+        color: var(--ink);
+        font-size: clamp(24px, 4vw, 36px);
+        line-height: 1.18;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .card,
+      table,
+      pre {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.82), transparent 34%),
+          rgba(255, 255, 255, 0.5);
+        box-shadow: 0 18px 58px rgba(77, 72, 55, 0.08);
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .card p {
+        margin-bottom: 0;
+      }
+
+      table {
+        width: 100%;
+        margin-top: 22px;
+        border-collapse: collapse;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 15px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--ink);
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      ol,
+      ul {
+        margin-top: 22px;
+        padding-left: 24px;
+      }
+
+      pre {
+        overflow-x: auto;
+        padding: 18px;
+        color: #4c5134;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 760px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="top-nav" aria-label="Site links">
+        <a href="invitation-cover-preview.html?v=20260615-1">Cover Demo</a>
+        <a href="design-direction.html">Design Direction</a>
+        <a href="UPDATE.md">Markdown Update</a>
+      </nav>
+
+      <p class="eyebrow">Aureveil Studios</p>
+      <h1>Premium digital wedding invitations as hosted mini experiences.</h1>
+      <p class="lead">
+        Aureveil Studios should sell interactive wedding microsites, not cheap downloadable cards.
+        Shopify handles commerce; the hosted card system handles the cinematic invitation experience.
+      </p>
+      <p class="quote">A mobile-first interactive wedding invitation with cinematic opening, music, countdown, map, RSVP, and WhatsApp sharing.</p>
+
+      <h2>Architecture</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="pill">Shopify</span>
+          <h3>Storefront and checkout</h3>
+          <p>Product pages, packages, add-ons, checkout, payment, order collection, and customer trust infrastructure.</p>
+        </article>
+        <article class="card">
+          <span class="pill">Card System</span>
+          <h3>Hosted invitation link</h3>
+          <p>Interactive page, animation, RSVP, personalization, music, countdown, maps, and final shareable URL.</p>
+        </article>
+      </div>
+
+      <h2>Packages</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Price</th>
+            <th>Includes</th>
+            <th>Revisions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic</td>
+            <td>RM49-RM89</td>
+            <td>1-page interactive card, names, date, venue, map, WhatsApp share</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Standard</td>
+            <td>RM99-RM199</td>
+            <td>Basic + music, countdown, RSVP form, photo section</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Premium</td>
+            <td>RM249-RM499</td>
+            <td>Standard + guest-name personalization, multi-language, custom colors, RSVP export</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Template Set</h2>
+      <div class="grid">
+        <article class="card"><h3>Minimal Luxury</h3><p>Ivory, serif typography, subtle fade, gold accent. Broad-market starter.</p></article>
+        <article class="card"><h3>Malay Elegant</h3><p>Cream, emerald, gold, geometric accents, Bismillah option.</p></article>
+        <article class="card"><h3>Chinese Banquet</h3><p>Red, ivory, gold, tea ceremony and dinner structure.</p></article>
+        <article class="card"><h3>Floral Pastel</h3><p>Blush, cream, floral framing, romantic transitions.</p></article>
+        <article class="card"><h3>Dark Cinematic</h3><p>Signature premium style with cinematic intro and photo reveal.</p></article>
+      </div>
+
+      <h2>Core Interactions</h2>
+      <ul>
+        <li>Tap-to-open opening screen with soft animation.</li>
+        <li>Music starts only after user interaction.</li>
+        <li>Horizontal swipe navigation for title-card-style sections.</li>
+        <li>Countdown, RSVP, map, gallery, WhatsApp share, and optional gift section.</li>
+      </ul>
+
+      <h2>Structured Card Data</h2>
+      <pre>{
+  "template": "minimal-luxury",
+  "brideName": "Alya",
+  "groomName": "Adam",
+  "date": "2026-08-22",
+  "time": "7:30 PM",
+  "venueName": "The Majestic Hotel Kuala Lumpur",
+  "mapLink": "https://maps.google.com/...",
+  "music": "soft-piano.mp3",
+  "rsvpEnabled": true,
+  "whatsappNumber": "60123456789"
+}</pre>
+
+      <h2>Immediate Priorities</h2>
+      <ol>
+        <li>Finalize package names, pricing, features, revision rules, and delivery promise.</li>
+        <li>Build one polished demo first: Dark Cinematic for brand signature or Minimal Luxury for safer conversion.</li>
+        <li>Create Shopify product page draft and personalization form.</li>
+        <li>Create manual order tracker and test one full order from purchase to delivery.</li>
+        <li>Record short demo videos for social proof before soft launch.</li>
+      </ol>
+    </main>
+  </body>
+</html>
