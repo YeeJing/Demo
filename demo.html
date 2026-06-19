@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alya & Adam | Aureveil Studios Demo</title>
+    <meta
+      name="description"
+      content="A premium mobile-first interactive wedding invitation demo with opening animation, swipe cards, countdown, map, RSVP, music, and WhatsApp sharing."
+    />
+    <style>
+      :root {
+        --ink: #f7f0e6;
+        --muted: #cfc1ad;
+        --dark: #080806;
+        --paper: #f7f1e4;
+        --sage: #b8c58d;
+        --line: rgba(247, 240, 230, 0.16);
+        --gold: #c2a05a;
+        --shadow: rgba(0, 0, 0, 0.34);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(8, 8, 6, 0.92), rgba(8, 8, 6, 0.62), rgba(8, 8, 6, 0.92)),
+          url("public/images/dark-wedding-bg.png") center / cover no-repeat;
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .opening {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 50% 42%, rgba(170, 161, 112, 0.18), transparent 36%),
+          radial-gradient(circle at 50% 100%, rgba(242, 231, 205, 0.08), transparent 34%),
+          #080806;
+        transition: opacity 720ms ease, transform 720ms ease, visibility 720ms ease;
+      }
+
+      body[data-open="true"] .opening {
+        visibility: hidden;
+        opacity: 0;
+        transform: scale(1.025);
+      }
+
+      .paper-wrap {
+        position: relative;
+        display: grid;
+        width: min(430px, calc(100vw - 28px));
+        min-height: min(720px, calc(100vh - 28px));
+        place-items: center;
+        cursor: pointer;
+        perspective: 1300px;
+      }
+
+      .paper-glow {
+        position: absolute;
+        width: 94%;
+        aspect-ratio: 0.64;
+        border-radius: 50%;
+        background: rgba(232, 224, 184, 0.16);
+        filter: blur(58px);
+      }
+
+      .paper-card,
+      .paper-panel,
+      .paper-seal,
+      .paper-copy {
+        position: absolute;
+      }
+
+      .paper-card {
+        width: min(390px, 86vw);
+        height: min(600px, calc(100vh - 126px));
+        border: 1px solid rgba(160, 137, 92, 0.28);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle at 22% 18%, rgba(255, 255, 251, 0.95), transparent 24%),
+          radial-gradient(circle at 70% 68%, rgba(222, 229, 194, 0.38), transparent 32%),
+          linear-gradient(180deg, #fbf8ef, #efe7d4);
+        box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
+        opacity: 0;
+        transform: translateY(18px) scale(0.94);
+        transition:
+          opacity 520ms ease 260ms,
+          transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1) 260ms;
+      }
+
+      .paper-panel {
+        top: 50%;
+        width: min(225px, 48vw);
+        height: min(620px, calc(100vh - 110px));
+        border: 1px solid rgba(72, 78, 47, 0.18);
+        background:
+          radial-gradient(circle at 32% 18%, rgba(244, 250, 211, 0.52), transparent 26%),
+          radial-gradient(circle at 70% 72%, rgba(151, 166, 102, 0.22), transparent 34%),
+          linear-gradient(145deg, #dce5b1, #bfc997);
+        box-shadow:
+          inset 1px 1px 0 rgba(255, 255, 255, 0.55),
+          inset -1px -1px 0 rgba(72, 83, 49, 0.18),
+          0 28px 70px rgba(0, 0, 0, 0.24);
+        overflow: hidden;
+        transform: translateY(-50%);
+        transition: transform 1080ms cubic-bezier(0.2, 0.76, 0.18, 1), opacity 720ms ease;
+      }
+
+      .paper-panel.left {
+        left: calc(50% - min(390px, 86vw) / 2);
+        border-radius: 8px 28px 28px 8px;
+        clip-path: polygon(0 0, 100% 0, 92% 16%, 100% 30%, 90% 45%, 100% 61%, 92% 78%, 100% 100%, 0 100%);
+        transform-origin: left center;
+      }
+
+      .paper-panel.right {
+        right: calc(50% - min(390px, 86vw) / 2);
+        border-radius: 28px 8px 8px 28px;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 8% 78%, 0 62%, 10% 45%, 0 30%, 8% 16%);
+        transform-origin: right center;
+      }
+
+      .floral {
+        position: absolute;
+        inset: 8% 0 auto;
+        width: 104%;
+        height: 84%;
+        fill: none;
+        stroke: rgba(83, 100, 58, 0.42);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.35;
+        filter:
+          drop-shadow(0 -1px 0 rgba(255, 255, 232, 0.55))
+          drop-shadow(0 1px 0 rgba(55, 67, 39, 0.32));
+      }
+
+      .paper-panel.right .floral {
+        transform: scaleX(-1);
+      }
+
+      .paper-seal {
+        left: 50%;
+        top: 56%;
+        display: grid;
+        width: 72px;
+        aspect-ratio: 1;
+        place-items: center;
+        border: 1px solid rgba(95, 101, 61, 0.2);
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 34% 26%, rgba(255, 255, 235, 0.62), transparent 23%),
+          linear-gradient(145deg, #d7e0ab, #aab77c);
+        color: rgba(75, 86, 48, 0.8);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 25px;
+        box-shadow:
+          inset 2px 2px 4px rgba(255, 255, 236, 0.66),
+          inset -3px -4px 8px rgba(65, 75, 42, 0.22),
+          0 14px 28px rgba(0, 0, 0, 0.25);
+        text-shadow:
+          0 -1px 0 rgba(255, 255, 231, 0.58),
+          0 1px 0 rgba(71, 81, 45, 0.26);
+        transform: translate(-50%, -50%);
+        transition: opacity 520ms ease, transform 620ms ease;
+      }
+
+      .paper-seal::before {
+        content: "";
+        position: absolute;
+        inset: 9px;
+        border: 1px solid rgba(82, 93, 52, 0.2);
+        border-radius: 50%;
+      }
+
+      .paper-copy {
+        top: calc(50% - 212px);
+        z-index: 3;
+        display: grid;
+        justify-items: center;
+        gap: 11px;
+        width: min(330px, 76vw);
+        color: rgba(73, 84, 48, 0.78);
+        text-align: center;
+        text-shadow:
+          0 -1px 0 rgba(255, 255, 231, 0.66),
+          0 2px 1px rgba(65, 77, 44, 0.16);
+      }
+
+      .paper-copy span,
+      .tap-icon {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .paper-copy strong {
+        max-width: 8.4ch;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(44px, 11vw, 70px);
+        font-weight: 500;
+        line-height: 0.9;
+      }
+
+      .tap-icon {
+        position: absolute;
+        bottom: clamp(18px, 3vh, 30px);
+        display: grid;
+        width: 58px;
+        aspect-ratio: 1;
+        place-items: center;
+        color: #dce5b1;
+      }
+
+      .tap-icon::before,
+      .tap-icon::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .tap-icon::before {
+        width: 52px;
+        aspect-ratio: 1;
+        border: 1px solid rgba(220, 229, 177, 0.62);
+      }
+
+      .tap-icon::after {
+        width: 12px;
+        aspect-ratio: 1;
+        background: #dce5b1;
+      }
+
+      body[data-opening="true"] .paper-card {
+        opacity: 1;
+        transform: translateY(-8px) scale(1);
+      }
+
+      body[data-opening="true"] .paper-panel.left {
+        transform: translateY(-50%) rotateY(-108deg) translateX(-8px);
+      }
+
+      body[data-opening="true"] .paper-panel.right {
+        transform: translateY(-50%) rotateY(108deg) translateX(8px);
+      }
+
+      body[data-opening="true"] .paper-seal,
+      body[data-opening="true"] .tap-icon,
+      body[data-opening="true"] .paper-copy {
+        opacity: 0;
+      }
+
+      .app {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 700ms ease 240ms;
+      }
+
+      body[data-open="true"] .app {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .topbar {
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .brand {
+        color: rgba(247, 240, 230, 0.72);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .icon-button,
+      .text-button {
+        min-height: 40px;
+        border: 1px solid rgba(247, 240, 230, 0.2);
+        border-radius: 999px;
+        background: rgba(8, 8, 6, 0.34);
+        color: var(--ink);
+        padding: 9px 13px;
+        text-decoration: none;
+        backdrop-filter: blur(14px);
+        cursor: pointer;
+      }
+
+      .deck {
+        display: grid;
+        grid-auto-columns: 100%;
+        grid-auto-flow: column;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+
+      .deck::-webkit-scrollbar {
+        display: none;
+      }
+
+      .scene {
+        display: grid;
+        min-height: 100%;
+        place-items: center;
+        scroll-snap-align: start;
+        padding: 20px;
+      }
+
+      .scene-inner {
+        width: min(680px, 100%);
+        text-align: center;
+      }
+
+      .scene-card {
+        border: 1px solid rgba(247, 240, 230, 0.16);
+        border-radius: 8px;
+        background: rgba(8, 8, 6, 0.58);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+        padding: clamp(24px, 6vw, 42px);
+        backdrop-filter: blur(18px);
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        font-size: clamp(62px, 18vw, 128px);
+        line-height: 0.84;
+      }
+
+      h2 {
+        font-size: clamp(42px, 12vw, 78px);
+        line-height: 0.92;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .date-line {
+        margin-top: 18px;
+        color: var(--ink);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .countdown {
+        display: inline-grid;
+        gap: 3px;
+        margin-top: 22px;
+        border: 1px solid rgba(194, 160, 90, 0.36);
+        border-radius: 8px;
+        padding: 15px 20px;
+      }
+
+      .countdown strong {
+        color: var(--gold);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 50px;
+        font-weight: 500;
+      }
+
+      .detail-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 22px;
+        text-align: left;
+      }
+
+      .detail-list div,
+      .rsvp-form {
+        border: 1px solid rgba(247, 240, 230, 0.14);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 14px;
+      }
+
+      .detail-list span {
+        display: block;
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .detail-list strong {
+        display: block;
+        margin-top: 6px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(247, 240, 230, 0.2);
+        border-radius: 999px;
+        background: var(--paper);
+        color: #15120e;
+        padding: 11px 16px;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--ink);
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .photo {
+        min-height: 190px;
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(8, 8, 6, 0.02), rgba(8, 8, 6, 0.44)),
+          url("public/images/dark-wedding-bg.png") center / cover no-repeat;
+        box-shadow: 0 18px 52px rgba(0, 0, 0, 0.24);
+      }
+
+      .photo:first-child {
+        grid-row: span 2;
+      }
+
+      .rsvp-form {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+        text-align: left;
+      }
+
+      .rsvp-form input,
+      .rsvp-form select {
+        width: 100%;
+        border: 1px solid rgba(247, 240, 230, 0.16);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--ink);
+        padding: 12px;
+      }
+
+      .dots {
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 16px 18px;
+      }
+
+      .dot {
+        width: 7px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: rgba(247, 240, 230, 0.28);
+      }
+
+      .dot.is-active {
+        background: var(--gold);
+      }
+
+      @media (max-width: 640px) {
+        .scene {
+          padding: 14px;
+        }
+
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .photo:first-child {
+          grid-row: auto;
+        }
+      }
+    </style>
+  </head>
+  <body data-open="false" data-opening="false">
+    <section class="opening" aria-label="Open wedding invitation">
+      <div class="paper-wrap" role="button" tabindex="0" aria-label="Open invitation">
+        <span class="paper-glow"></span>
+        <span class="paper-card"></span>
+        <span class="paper-panel left">
+          <svg class="floral" viewBox="0 0 220 520" aria-hidden="true">
+            <path d="M36 438 C64 374 47 321 87 257 C119 206 116 151 91 85" />
+            <path d="M61 394 C31 383 19 354 33 333 C51 304 94 318 95 353 C96 380 81 394 61 394Z" />
+            <path d="M54 350 C82 336 96 349 91 373 M36 338 C57 357 57 379 48 392" />
+            <path d="M111 278 C80 260 77 219 106 204 C139 186 170 223 151 254 C141 272 128 282 111 278Z" />
+            <path d="M105 211 C125 233 126 254 112 276 M145 214 C128 231 113 248 106 272" />
+            <path d="M96 142 C63 125 62 85 88 68 C119 49 153 82 139 116 C131 137 116 146 96 142Z" />
+            <path d="M113 329 C145 305 180 319 184 350 C188 382 149 404 124 379 C105 361 103 345 113 329Z" />
+          </svg>
+        </span>
+        <span class="paper-panel right">
+          <svg class="floral" viewBox="0 0 220 520" aria-hidden="true">
+            <path d="M36 438 C64 374 47 321 87 257 C119 206 116 151 91 85" />
+            <path d="M61 394 C31 383 19 354 33 333 C51 304 94 318 95 353 C96 380 81 394 61 394Z" />
+            <path d="M54 350 C82 336 96 349 91 373 M36 338 C57 357 57 379 48 392" />
+            <path d="M111 278 C80 260 77 219 106 204 C139 186 170 223 151 254 C141 272 128 282 111 278Z" />
+            <path d="M105 211 C125 233 126 254 112 276 M145 214 C128 231 113 248 106 272" />
+            <path d="M96 142 C63 125 62 85 88 68 C119 49 153 82 139 116 C131 137 116 146 96 142Z" />
+            <path d="M113 329 C145 305 180 319 184 350 C188 382 149 404 124 379 C105 361 103 345 113 329Z" />
+          </svg>
+        </span>
+        <span class="paper-copy">
+          <span>You are invited</span>
+          <strong>Alya &amp; Adam</strong>
+          <span>August 22, 2026</span>
+        </span>
+        <span class="paper-seal">A+A</span>
+        <span class="tap-icon" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <main class="app" aria-label="Interactive wedding invitation demo">
+      <header class="topbar">
+        <span class="brand">Aureveil Studios</span>
+        <button class="icon-button" type="button" data-music>Music Off</button>
+      </header>
+
+      <section class="deck" data-deck>
+        <article class="scene">
+          <div class="scene-inner">
+            <p class="eyebrow">The wedding of</p>
+            <h1>Alya &amp; Adam</h1>
+            <p class="date-line">Saturday, 22 August 2026</p>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-inner scene-card">
+            <p class="eyebrow">Save the date</p>
+            <h2>22 August 2026</h2>
+            <p>Dinner reception begins at 7:30 PM at The Majestic Hotel Kuala Lumpur.</p>
+            <div class="countdown">
+              <strong data-days>--</strong>
+              <span>days to go</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-inner scene-card">
+            <p class="eyebrow">With joyful hearts</p>
+            <h2>We invite you to celebrate with us.</h2>
+            <p>Join us for an evening of family, dinner, music, and memory-making as we begin our next chapter together.</p>
+            <div class="gallery">
+              <div class="photo"></div>
+              <div class="photo"></div>
+              <div class="photo"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-inner scene-card">
+            <p class="eyebrow">Event details</p>
+            <h2>Reception</h2>
+            <div class="detail-list">
+              <div><span>Date</span><strong>Saturday, 22 August 2026</strong></div>
+              <div><span>Time</span><strong>7:30 PM</strong></div>
+              <div><span>Venue</span><strong>The Majestic Hotel Kuala Lumpur</strong></div>
+              <div><span>Dress code</span><strong>Formal neutral</strong></div>
+            </div>
+            <div class="actions">
+              <a class="button" href="https://maps.google.com/?q=The+Majestic+Hotel+Kuala+Lumpur" target="_blank" rel="noreferrer">Open Map</a>
+              <a class="button secondary" href="https://wa.me/?text=Alya%20%26%20Adam%20Wedding%20Invitation%20https%3A%2F%2Fyeejing.github.io%2FDemo%2Fdemo.html" target="_blank" rel="noreferrer">Share</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-inner scene-card">
+            <p class="eyebrow">Kindly respond</p>
+            <h2>RSVP</h2>
+            <p>Please respond before the RSVP deadline.</p>
+            <form class="rsvp-form" data-rsvp>
+              <input aria-label="Name" required placeholder="Name" />
+              <select aria-label="Attendance">
+                <option>Will attend</option>
+                <option>Unable to attend</option>
+              </select>
+              <input aria-label="Number of guests" inputmode="numeric" placeholder="Number of guests" />
+              <button class="button" type="submit">Send RSVP</button>
+            </form>
+          </div>
+        </article>
+      </section>
+
+      <footer class="dots" aria-hidden="true">
+        <span class="dot is-active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </footer>
+    </main>
+
+    <script>
+      const body = document.body;
+      const opener = document.querySelector(".paper-wrap");
+      const deck = document.querySelector("[data-deck]");
+      const dots = [...document.querySelectorAll(".dot")];
+      const music = document.querySelector("[data-music]");
+      const rsvp = document.querySelector("[data-rsvp]");
+
+      function openDemo() {
+        if (body.dataset.opening === "true") return;
+        body.dataset.opening = "true";
+        window.setTimeout(() => {
+          body.dataset.open = "true";
+        }, 1180);
+      }
+
+      opener.addEventListener("click", openDemo);
+      opener.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openDemo();
+        }
+      });
+
+      function updateCountdown() {
+        const today = new Date();
+        const date = new Date("2026-08-22T00:00:00+08:00");
+        const diff = Math.max(0, Math.ceil((date - today) / 86400000));
+        document.querySelector("[data-days]").textContent = diff;
+      }
+
+      updateCountdown();
+
+      deck.addEventListener("scroll", () => {
+        const index = Math.round(deck.scrollLeft / deck.clientWidth);
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle("is-active", dotIndex === index);
+        });
+      });
+
+      music.addEventListener("click", () => {
+        const on = music.textContent.includes("Off");
+        music.textContent = on ? "Music On" : "Music Off";
+      });
+
+      rsvp.addEventListener("submit", (event) => {
+        event.preventDefault();
+        rsvp.innerHTML = "<p>Your RSVP has been recorded for this demo.</p>";
+      });
+    </script>
+  </body>
+</html>
